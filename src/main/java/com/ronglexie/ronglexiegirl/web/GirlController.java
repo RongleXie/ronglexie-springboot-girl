@@ -114,4 +114,17 @@ public class GirlController {
         girlRepository.delete(id);
     }
 
+    /**
+     * 根据年龄查询数据
+     *
+     * @param age
+     * @return java.util.List<com.ronglexie.ronglexiegirl.entity.Girl>
+     * @author wxt.xqr
+     * @version 2018-1-14
+     */
+    @GetMapping("girls/fingByAge/{age}")
+    public List<Girl> findByAge(@PathVariable("age") Integer age){
+        return girlRepository.findByAge(age);
+    }
+
 }
