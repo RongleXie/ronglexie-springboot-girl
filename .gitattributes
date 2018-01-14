@@ -2,3 +2,7 @@
 *.less linguist-language=java
 *.js linguist-language=java
 *.html linguist-language=java
+*.yml linguist-language=java
+*.cmd linguist-language=java
+*.jar linguist-language=java
+*.properties linguist-language=java
