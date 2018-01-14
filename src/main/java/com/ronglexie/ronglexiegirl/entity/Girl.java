@@ -3,6 +3,7 @@ package com.ronglexie.ronglexiegirl.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 /**
  * @author ronglexie
@@ -17,6 +18,7 @@ public class Girl {
 
     private String cupSize;
 
+    @Min(value = 18,message = "未成年不能保存")
     private Integer age;
 
     public Girl() {

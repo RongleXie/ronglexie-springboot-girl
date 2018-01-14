@@ -3,11 +3,15 @@ package com.ronglexie.ronglexiegirl.web;
 import com.ronglexie.ronglexiegirl.entity.Girl;
 import com.ronglexie.ronglexiegirl.properties.GirlProperties;
 import com.ronglexie.ronglexiegirl.repository.GirlRepository;
+import com.ronglexie.ronglexiegirl.service.GirlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author ronglexie
@@ -22,6 +26,9 @@ public class GirlController {
 
     @Autowired
     GirlRepository girlRepository;
+
+    @Autowired
+    GirlService girlService;
 
     @Value("${girl.cupSize}")
     private String cupSize;
@@ -52,19 +59,17 @@ public class GirlController {
     /**
      * 新增一条数据
      *
-     * @param cupSize
-     * @param age
      * @return com.ronglexie.ronglexiegirl.entity.Girl
      * @author wxt.xqr
      * @version 2018-1-14
      */
     @PostMapping("girls")
-    public Girl addGirl(@RequestParam("cupSize") String cupSize,
-                        @RequestParam("age") Integer age){
-        Girl girl = new Girl();
-        girl.setAge(age);
-        girl.setCupSize(cupSize);
-        return girlRepository.save(girl);
+    public Girl addGirl(@Valid Girl girl,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            System.out.println(""+bindingResult.getFieldError().getDefaultMessage());
+            return null;
+        }
+        return girlService.save(girl);
     }
 
     /**
@@ -98,7 +103,7 @@ public class GirlController {
         girl.setId(id);
         girl.setAge(age);
         girl.setCupSize(cupSize);
-        return girlRepository.save(girl);
+        return girlService.save(girl);
     }
 
     /**
