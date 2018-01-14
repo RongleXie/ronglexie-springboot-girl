@@ -1,3 +1,6 @@
 server:
   port: 8888
   context-path: /girl
+girl:
+  cupSize: F
+  age: 20
