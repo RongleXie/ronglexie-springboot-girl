@@ -10,3 +10,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+management:
+  port: 55555
+  health:
+    mail:
+      enabled: true
