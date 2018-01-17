@@ -4,6 +4,7 @@ import com.ronglexie.ronglexiegirl.entity.Girl;
 import com.ronglexie.ronglexiegirl.properties.GirlProperties;
 import com.ronglexie.ronglexiegirl.repository.GirlRepository;
 import com.ronglexie.ronglexiegirl.service.GirlService;
+import com.ronglexie.ronglexiegirl.utils.Messageutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.BindingResult;
@@ -51,9 +52,9 @@ public class GirlController {
      * @version 2018-1-14
      */
     @GetMapping("girls")
-    public List<Girl> getGirlList(){
+    public Object getGirlList(){
         List<Girl> girlList = girlRepository.findAll();
-        return girlList;
+        return Messageutils.successed("获取数据成功",girlList);
     }
 
     /**
@@ -64,12 +65,11 @@ public class GirlController {
      * @version 2018-1-14
      */
     @PostMapping("girls")
-    public Girl addGirl(@Valid Girl girl,BindingResult bindingResult){
+    public Object addGirl(@Valid Girl girl,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            System.out.println(""+bindingResult.getFieldError().getDefaultMessage());
-            return null;
+            return Messageutils.error(bindingResult.getFieldError().getDefaultMessage());
         }
-        return girlService.save(girl);
+        return Messageutils.successed("保存成功",girlService.save(girl));
     }
 
     /**
@@ -81,8 +81,8 @@ public class GirlController {
      * @version 2018-1-14
      */
     @GetMapping("girls/{id}")
-    public Girl getOneGirl(@PathVariable("id") Integer id){
-        return girlRepository.findOne(id);
+    public Object getOneGirl(@PathVariable("id") Integer id){
+        return Messageutils.successed("获取数据成功",girlRepository.findOne(id));
     }
 
     /**
@@ -96,14 +96,14 @@ public class GirlController {
      * @version 2018-1-14
      */
     @PutMapping("girls/{id}")
-    public Girl updateGirl(@PathVariable("id") Integer id,
+    public Object updateGirl(@PathVariable("id") Integer id,
                            @RequestParam("cupSize") String cupSize,
                            @RequestParam("age") Integer age){
         Girl girl = new Girl();
         girl.setId(id);
         girl.setAge(age);
         girl.setCupSize(cupSize);
-        return girlService.save(girl);
+        return Messageutils.successed("更新数据成功",girlService.save(girl));
     }
 
     /**
@@ -115,8 +115,9 @@ public class GirlController {
      * @version 2018-1-14
      */
     @DeleteMapping("girls/{id}")
-    public void deleteGirl(@PathVariable("id") Integer id){
+    public Object deleteGirl(@PathVariable("id") Integer id){
         girlRepository.delete(id);
+        return Messageutils.successed("删除数据成功",null);
     }
 
     /**
@@ -128,8 +129,8 @@ public class GirlController {
      * @version 2018-1-14
      */
     @GetMapping("girls/fingByAge/{age}")
-    public List<Girl> findByAge(@PathVariable("age") Integer age){
-        return girlRepository.findByAge(age);
+    public Object findByAge(@PathVariable("age") Integer age){
+        return Messageutils.successed("获取数据成功",girlRepository.findByAge(age));
     }
 
 }
