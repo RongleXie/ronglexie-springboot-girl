@@ -1,6 +1,7 @@
 package com.ronglexie.ronglexiegirl.web;
 
 import com.ronglexie.ronglexiegirl.entity.Girl;
+import com.ronglexie.ronglexiegirl.enums.MessageEnum;
 import com.ronglexie.ronglexiegirl.properties.GirlProperties;
 import com.ronglexie.ronglexiegirl.repository.GirlRepository;
 import com.ronglexie.ronglexiegirl.service.GirlService;
@@ -67,7 +68,7 @@ public class GirlController {
     @PostMapping("girls")
     public Object addGirl(@Valid Girl girl,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return Messageutils.error(bindingResult.getFieldError().getDefaultMessage());
+            return Messageutils.error(MessageEnum.UNKNOW_ERROR.getCode(),bindingResult.getFieldError().getDefaultMessage());
         }
         return Messageutils.successed("保存成功",girlService.save(girl));
     }
@@ -98,7 +99,7 @@ public class GirlController {
     @PutMapping("girls/{id}")
     public Object updateGirl(@PathVariable("id") Integer id,
                            @RequestParam("cupSize") String cupSize,
-                           @RequestParam("age") Integer age){
+                           @RequestParam("id") Integer age){
         Girl girl = new Girl();
         girl.setId(id);
         girl.setAge(age);
@@ -128,9 +129,22 @@ public class GirlController {
      * @author wxt.xqr
      * @version 2018-1-14
      */
-    @GetMapping("girls/fingByAge/{age}")
-    public Object findByAge(@PathVariable("age") Integer age){
+    @GetMapping("girls/fingByAge/{id}")
+    public Object findByAge(@PathVariable("id") Integer age){
         return Messageutils.successed("获取数据成功",girlRepository.findByAge(age));
+    }
+
+    /**
+     * 查询人员年龄数据
+     *
+     * @param id
+     * @return java.util.List<com.ronglexie.ronglexiegirl.entity.Girl>
+     * @author wxt.xqr
+     * @version 2018-1-14
+     */
+    @GetMapping("girls/getAge/{id}")
+    public Object getAge(@PathVariable("id") Integer id) throws Exception {
+        return girlService.getAge(id);
     }
 
 }

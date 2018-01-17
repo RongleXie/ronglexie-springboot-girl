@@ -1,6 +1,7 @@
 package com.ronglexie.ronglexiegirl.utils;
 
 import com.ronglexie.ronglexiegirl.entity.Message;
+import com.ronglexie.ronglexiegirl.enums.MessageEnum;
 
 /**
  * 消息工具类
@@ -21,7 +22,7 @@ public class Messageutils {
      */
     public static Object successed(String msg,Object object){
         Message message = new Message();
-        message.setCode(200);
+        message.setCode(MessageEnum.SUCCESS.getCode());
         message.setMsg(msg);
         message.setResult(object);
         return message;
@@ -46,9 +47,9 @@ public class Messageutils {
      * @author wxt.xqr
      * @version 2018-1-17
      */
-    public static Object error(String msg){
+    public static Object error(Integer code,String msg){
         Message message = new Message();
-        message.setCode(-1);
+        message.setCode(code);
         message.setMsg(msg);
         message.setResult(null);
         return message;
