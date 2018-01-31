@@ -6,6 +6,8 @@ import com.ronglexie.ronglexiegirl.properties.GirlProperties;
 import com.ronglexie.ronglexiegirl.repository.GirlRepository;
 import com.ronglexie.ronglexiegirl.service.GirlService;
 import com.ronglexie.ronglexiegirl.utils.Messageutils;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.BindingResult;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * @author ronglexie
@@ -38,6 +39,7 @@ public class GirlController {
     @Value("${girl.age}")
     public Integer age;
 
+    @ApiOperation(value="获取girl详情", notes="")
     @GetMapping("girlDetail")
     public String girl(){
         return "GirlProperties:Age:"+girlProperties.getAge()+"  CupSize:"+girlProperties.getCupSize()
@@ -52,11 +54,27 @@ public class GirlController {
      * @author wxt.xqr
      * @version 2018-1-14
      */
+    @ApiOperation(value="获取girl列表", notes="获取配置文件中注入属性值的Girl对象")
     @GetMapping("girls")
     public Object getGirlList(){
         List<Girl> girlList = girlRepository.findAll();
         return Messageutils.successed("获取数据成功",girlList);
     }
+
+	/**
+	 * 获取一个对象
+	 *
+	 * @param id
+	 * @return com.ronglexie.ronglexiegirl.entity.Girl
+	 * @author wxt.xqr
+	 * @version 2018-1-14
+	 */
+	@ApiOperation(value="获取一个Girl", notes="获取一个Girl")
+	@GetMapping("girls/{id}")
+	@ApiImplicitParam(name = "id", value = "实体对象Girl的ID", required = true, dataType = "Long",paramType="path")
+	public Object getOneGirl(@PathVariable("id") Integer id){
+		return Messageutils.successed("获取数据成功",girlRepository.findOne(id));
+	}
 
     /**
      * 新增一条数据
@@ -65,25 +83,14 @@ public class GirlController {
      * @author wxt.xqr
      * @version 2018-1-14
      */
+    @ApiOperation(value="新增一条数据", notes="新增一条数据")
+	@ApiImplicitParam(name = "girl", value = "实体对象Girl", required = true, dataType = "Girl",paramType="path")
     @PostMapping("girls")
     public Object addGirl(@Valid Girl girl,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return Messageutils.error(MessageEnum.UNKNOW_ERROR.getCode(),bindingResult.getFieldError().getDefaultMessage());
         }
         return Messageutils.successed("保存成功",girlService.save(girl));
-    }
-
-    /**
-     * 获取一个对象
-     *
-     * @param id
-     * @return com.ronglexie.ronglexiegirl.entity.Girl
-     * @author wxt.xqr
-     * @version 2018-1-14
-     */
-    @GetMapping("girls/{id}")
-    public Object getOneGirl(@PathVariable("id") Integer id){
-        return Messageutils.successed("获取数据成功",girlRepository.findOne(id));
     }
 
     /**
