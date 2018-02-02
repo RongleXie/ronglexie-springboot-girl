@@ -8,13 +8,13 @@ package com.ronglexie.ronglexiegirl.entity;
  */
 public class Message<T> {
 
-    //编码
+    /** 编码 */
     private Integer code;
 
-    //消息
+    /** 消息 */
     private String msg;
 
-    //结果集
+    /** 结果集 */
     private T result;
 
     public Integer getCode() {

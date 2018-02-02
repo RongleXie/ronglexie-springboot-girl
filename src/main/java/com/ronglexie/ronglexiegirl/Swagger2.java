@@ -32,7 +32,6 @@ public class Swagger2 {
 				.title("Spring Boot中使用Swagger2构建RESTful APIs")
 				.description("更多相关文章请关注：http://www.ronglexie.top/")
 				.termsOfServiceUrl("http://www.ronglexie.top/")
-				.contact("RongleXie")
 				.version("1.0")
 				.build();
 	}

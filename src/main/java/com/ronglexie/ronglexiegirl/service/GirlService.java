@@ -6,18 +6,20 @@ import com.ronglexie.ronglexiegirl.exception.GirlException;
 import com.ronglexie.ronglexiegirl.repository.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author ronglexie
  * @version 2018-1-14
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class GirlService {
 
     @Autowired
     GirlRepository girlRepository;
+
+    public static final Integer ADULT_AGE = 18;
 
     /**
      * 保存一条数据
@@ -27,7 +29,6 @@ public class GirlService {
      * @author wxt.xqr
      * @version 2018-1-14
      */
-    @Transactional
     public Girl save(Girl girl){
         return girlRepository.save(girl);
     }
@@ -42,7 +43,7 @@ public class GirlService {
      */
     public Integer getAge(Integer id) throws Exception {
         Integer age = girlRepository.findOne(id).getAge();
-        if (age<18){
+        if (age < ADULT_AGE){
             throw new GirlException(MessageEnum.NONAGE);
         }else {
             throw new GirlException(MessageEnum.ADULT);

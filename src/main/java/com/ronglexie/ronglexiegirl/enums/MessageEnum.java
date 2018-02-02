@@ -8,6 +8,7 @@ package com.ronglexie.ronglexiegirl.enums;
  */
 public enum MessageEnum {
 
+	/** 消息枚举 */
 	UNKNOW_ERROR(-1,"未知错误"),
 	SUCCESS(0,"成功"),
 	NONAGE(110,"未成年人员"),
