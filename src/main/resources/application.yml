@@ -13,8 +13,13 @@ spring:
   cache:
     ehcache:
       config: ehcache.xml
+  output:
+    ansi:
+      enabled: detect
 management:
   port: 55555
   health:
     mail:
       enabled: true
+logging:
+  config: classpath:logback-spring.xml
