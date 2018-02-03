@@ -21,5 +21,8 @@ management:
   health:
     mail:
       enabled: true
+  info:
+    git:
+      mode: full
 logging:
   config: classpath:logback-spring.xml
