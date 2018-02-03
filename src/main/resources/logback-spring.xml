@@ -37,12 +37,12 @@
             <MaxFileSize>10MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
-    <logger name="com.ronglexie.ronglexiegirl" level="DEBUG" additivity="false">
+    <logger name="com.ronglexie.ronglexiegirl" level="${logging.level.com.ronglexie.ronglexiegirl}" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </logger>
     <!--控制台打印资源加载信息 等级从trace开始 TRACE < DEBUG < INFO < WARN < ERROR-->
-    <root level="INFO">
+    <root level="${logging.level.root}">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>

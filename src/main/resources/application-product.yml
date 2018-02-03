@@ -4,3 +4,7 @@ server:
 girl:
   cupSize: F
   age: 20
+logging:
+  level:
+    root: warn
+    com.ronglexie.ronglexiegirl: warn
