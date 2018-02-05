@@ -97,6 +97,12 @@
             <artifactId>druid</artifactId>
             <version>1.0.28</version>
         </dependency>
+		<!-- Redis数据库 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>1.5.3.RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<build>

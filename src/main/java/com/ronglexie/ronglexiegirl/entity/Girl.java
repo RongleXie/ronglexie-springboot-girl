@@ -4,13 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
+import java.io.Serializable;
 
 /**
  * @author ronglexie
  * @version 2018-1-14
  */
 @Entity
-public class Girl {
+public class Girl implements Serializable {
 
     @Id
     @GeneratedValue
