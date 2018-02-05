@@ -52,6 +52,8 @@ management:
   health:
     mail:
       enabled: true
+  security:
+    enabled: false
   info:
     git:
       mode: full
