@@ -47,7 +47,10 @@ spring:
   output:
     ansi:
       enabled: detect
-management:
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+    management:
   port: 55555
   health:
     mail:
@@ -59,3 +62,8 @@ management:
       mode: full
 logging:
   config: classpath:logback-spring.xml
+
+security:
+  basic:
+    enabled: false
+    authorize-mode: NONE

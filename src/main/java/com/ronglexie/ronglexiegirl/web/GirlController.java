@@ -8,6 +8,7 @@ import com.ronglexie.ronglexiegirl.service.GirlService;
 import com.ronglexie.ronglexiegirl.utils.Messageutils;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.BindingResult;
@@ -54,6 +55,7 @@ public class GirlController {
      * @author wxt.xqr
      * @version 2018-1-14
      */
+    @RequiresPermissions("girls:view")
     @ApiOperation(value="获取girl列表", notes="获取配置文件中注入属性值的Girl对象")
     @GetMapping("girls")
     public Object getGirlList(){

@@ -8,4 +8,9 @@
            timeToLiveSeconds="600">
     </cache>
 
+    <cache name="Users"
+           maxEntriesLocalHeap="200"
+           timeToLiveSeconds="600">
+    </cache>
+
 </ehcache>

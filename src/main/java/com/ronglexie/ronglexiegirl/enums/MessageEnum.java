@@ -12,7 +12,8 @@ public enum MessageEnum {
 	UNKNOW_ERROR(-1,"未知错误"),
 	SUCCESS(0,"成功"),
 	NONAGE(110,"未成年人员"),
-	ADULT(200,"已成年人员");
+	ADULT(200,"已成年人员"),
+	UNAUTHORIZED(403,"权限认证失败");
 
 	private Integer code;
 
